@@ -6,28 +6,41 @@
     <title>Socket.IO chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
 </head>
+<style>
+@media only screen and (max-width: 600px) {
+    form input {
+        width: 81%;
+    }
+
+    form button {
+        width: 18%;
+    }
+  }
+</style>
 <body>
-    <ul id="messages"></ul>
+    <div id="container">
+        <div>
+            <span>You are </span><span id="nickname"></span><span>.</span>
+        </div>
+        <div>
+            <span>Online users:</span>
+        </div>
+        <div id="messages-box">
+            <div id="messages-wrapper">
+                <ul id="messages"></ul>
+            </div>
+        </div>
+        <div id="users-box">
+            <ul id="users"></ul>
+        </div>
+    </div>
+    
     <form action="">
         <input id="m" autocomplete="off" /><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    $(function () {
-        var socket = io();
-        $('form').submit(function(e){
-            e.preventDefault(); // prevents page reloading
-            socket.emit('chat message', $('#m').val());
-            $('#m').val('');
-            return false;
-        });
-        socket.on('chat message', function(msg){
-            $('#messages').append($('<li>').text(msg));
-        });
-    });
-</script>
+    <script src="main.js"></script>
   </body>
 </html>
